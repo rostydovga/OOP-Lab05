@@ -8,6 +8,8 @@ import java.lang.Integer;
  */
 public final class UseSet {
 
+	 private static final int ELEMS = 20;
+	
     private UseSet() {
     }
 
@@ -35,30 +37,23 @@ public final class UseSet {
          * 6) Verifies if all the numbers left in the set are even
          */
     	//1
-    	TreeSet<String> tree = new TreeSet();
+    	final Set<String> tree = new TreeSet<String>();
     	//2
-    	for ( int i = 1; i <= 20; i++) {
-    		tree.add(String.valueOf(i));
+    	for ( int i = 1; i <= ELEMS; i++) {
+    		tree.add(Integer.toString(i));
     	}
     	
     	
     	//3
-    	System.out.println(tree.toString());
+    	System.out.println("initial Set: " + tree);
     	
     	//4
-    	String[] s1 = new String[20];
-    	int n = 0;
-    	for(String s : tree) {
-    		int num = Integer.parseInt(s);
-    		//System.out.println("Valore % num = " + num%3);
-    		if(num%3 == 0) {
-    			//tree.iterator().remove();
-    			s1[n] = s;
-    			n++;
+    	final Iterator<String> iter = tree.iterator();
+    	while (iter.hasNext()) {
+    		if(Integer.parseInt(iter.next()) % 3 == 0) {
+    			iter.remove();
     		}
     	}
-    	tree.removeAll(Arrays.asList(s1));
-    	//System.out.println("s1 to string " + Arrays.asList(s1));
     	
     	//5
     	//System.out.println("Print col for each");
@@ -66,6 +61,14 @@ public final class UseSet {
     		System.out.println(s);
     	}
     	System.out.println(tree.toString());
+    	
+    	//6
+    	final Set<String> set = new TreeSet<>();
+    	for(int i = 2; i < ELEMS; i+=2) {
+    		set.add(Integer.toString(i));
+    	}
+    	System.out.println("Elemnet: " + set);
+    	System.out.println(set.containsAll(tree));
     	
     }
 }
